@@ -12,10 +12,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(log, index) in logs" :key="index">
-              <td>{{ log.date.toISOString() }}</td>
-              <td>{{ log.text }}</td>
-            </tr>
+            <LogEntry v-for="(log, index) in logs" :key="index" :log="log" />
           </tbody>
         </table>
       </div>
@@ -28,6 +25,7 @@ import 'normalize.css'
 import 'concrete.css'
 
 import CreateLog from './components/CreateLog'
+import LogEntry from './components/LogEntry'
 
 export default {
   name: 'app',
@@ -38,6 +36,7 @@ export default {
   },
   components: {
     CreateLog,
+    LogEntry,
   },
   methods: {
     onCreateLog: function(log) {
@@ -45,7 +44,6 @@ export default {
         date: new Date(),
         content: log,
       })
-
     }
   }
 }
