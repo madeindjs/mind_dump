@@ -4,17 +4,7 @@
       <div class="column">
         <h1>Log Stuff</h1>
         <CreateLog @create="onCreateLog"/>
-        <table>
-          <thead>
-            <tr>
-              <th>hour</th>
-              <th>content</th>
-            </tr>
-          </thead>
-          <tbody>
-            <LogEntry v-for="(log, index) in logs" :key="index" :log="log" />
-          </tbody>
-        </table>
+        <LogEntry v-for="(log, index) in logs" :key="index" :log="log" />
       </div>
     </div>
   </div>
@@ -51,7 +41,7 @@ export default {
       })
 
       localStorage.setItem('logs', JSON.stringify(this.logs));
-    }
+    },
   }
 }
 </script>
