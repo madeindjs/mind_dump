@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td>{{ log.date.toISOString() }}</td>
+    <td>{{ log.date }}</td>
     <td>{{ log.content }}</td>
   </tr>
 </template>

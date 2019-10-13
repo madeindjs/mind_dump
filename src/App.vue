@@ -38,12 +38,19 @@ export default {
     CreateLog,
     LogEntry,
   },
+  mounted() {
+    this.logs = JSON.parse(localStorage.getItem('logs')) || []
+  },
   methods: {
     onCreateLog: function(log) {
+      const now = new Date
+
       this.logs.push({
-        date: new Date(),
+        date: now.toISOString(),
         content: log,
       })
+
+      localStorage.setItem('logs', JSON.stringify(this.logs));
     }
   }
 }
