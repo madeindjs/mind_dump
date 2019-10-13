@@ -4,9 +4,20 @@
       <div class="column">
         <h1>Log Stuff</h1>
         <CreateLog @create="onCreateLog"/>
-        <ul>
-          <li v-for="(log, index) in logs" :key="index">{{ log }}</li>
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>hour</th>
+              <th>content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(log, index) in logs" :key="index">
+              <td>{{ log.date.toISOString() }}</td>
+              <td>{{ log.text }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -30,7 +41,10 @@ export default {
   },
   methods: {
     onCreateLog: function(log) {
-      this.logs.push(log)
+      this.logs.push({
+        date: new Date(),
+        content: log,
+      })
 
     }
   }
