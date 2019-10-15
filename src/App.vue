@@ -1,18 +1,16 @@
 <template>
   <div id="app" class="container">
-    <div class="row">
-      <div class="column">
-        <h1>Log Stuff</h1>
-        <CreateLog @create="onCreateLog"/>
-        <hr>
-        <Thought
-          v-for="(thought, index) in thoughts"
-          :key="index"
-          :id="thought.id"
-          :content="thought.content"
-          :tags="thought.tags"
-        />
-      </div>
+    <h1>Log Stuff</h1>
+    <CreateLog @create="onCreateLog"/>
+    <hr>
+
+    <div class="column" v-for="(thought, index) in thoughts" :key="index">
+      <Thought
+        :id="thought.id"
+        :content="thought.content"
+        :tags="thought.tags"
+      />
+      <hr>
     </div>
   </div>
 </template>
