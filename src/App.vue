@@ -5,7 +5,13 @@
         <h1>Log Stuff</h1>
         <CreateLog @create="onCreateLog"/>
         <hr>
-        <LogEntry v-for="(log, index) in logs.reverse()" :key="index" :log="log" />
+        <Thought
+          v-for="(thought, index) in thoughts"
+          :key="index"
+          :id="thought.id"
+          :content="thought.content"
+          :tags="thought.tags"
+        />
       </div>
     </div>
   </div>
@@ -15,35 +21,41 @@
 import 'normalize.css'
 import 'concrete.css'
 
+const axios = require('axios');
+
 import CreateLog from './components/CreateLog'
-import LogEntry from './components/LogEntry'
+import Thought from './components/Thought'
 
 export default {
   name: 'app',
   data() {
     return {
-      logs: []
+      thoughts: []
     } 
   },
   components: {
     CreateLog,
-    LogEntry,
+    Thought,
   },
   mounted() {
-    this.logs = JSON.parse(localStorage.getItem('logs')) || []
+    this.loadThoughts()
   },
   methods: {
+    loadThoughts: function() {
+      axios.get('http://127.0.0.1:5000/thoughts/')
+        .then(res => this.thoughts = res.data)
+        // .catch(e => console.error(e))
+    },
     onCreateLog: function(content) {
       const now = new Date
       const date = now.toISOString()
 
-      this.logs.push({
+      this.thoughts.push({
         timestamp: new Date().getTime(),
         date,
         content,
       })
-
-      localStorage.setItem('logs', JSON.stringify(this.logs));
+      localStorage.setItem('logs', JSON.stringify(this.thoughts));
     },
   }
 }
