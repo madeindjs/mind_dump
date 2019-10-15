@@ -1,9 +1,10 @@
 <template>
-  <p>
-    <span class="logDate">{{ log.date.slice(0, 16) }}</span>
-    <span class="logContent">{{ log.content }}</span>
-    <span class="logTag">@home</span>
-  </p>
+  <div class="row">
+    <div class="column">{{ log.date.slice(0, 16) }}</div>
+    <div class="column">
+      <input type="text" :value="log.content">
+    </div>
+  </div>
 </template>
 
 <script>
@@ -23,18 +24,8 @@ export default {
 };
 </script>
 <style scoped>
-p {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-span.logDate {
-  color: gray;
-  margin-right: 1rem;
-}
-span.logContent {
-  margin-right: 1rem;
-}
-span.logTag {
-  color: yellow;
+input {
+  border: none;
+  margin-bottom: 0;
 }
 </style>

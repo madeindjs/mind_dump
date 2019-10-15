@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <form @submit.prevent="submit">
-      <input type="text" v-model="content" />
-      <input type="submit" value="Add" v-if="content" />
-    </form>
+  <div class="row">
+    <div class="column">
+      New log
+    </div>
+    <div class="column">
+      <form @submit.prevent="submit">
+        <input type="text" v-model="content" />
+      </form>
+    </div>
   </div>
 </template>
 
@@ -16,9 +20,15 @@ export default {
     };
   },
   methods: {
-    submit: function () {
-      this.$emit('create', this.content)
+    submit: function() {
+      if (!this.content) return
+      this.$emit("create", this.content)
     }
   }
 };
 </script>
+<style>
+input, form {
+  margin-bottom: 0;
+}
+</style>

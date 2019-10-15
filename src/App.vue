@@ -4,7 +4,8 @@
       <div class="column">
         <h1>Log Stuff</h1>
         <CreateLog @create="onCreateLog"/>
-        <LogEntry v-for="(log, index) in logs" :key="index" :log="log" />
+        <hr>
+        <LogEntry v-for="(log, index) in logs.reverse()" :key="index" :log="log" />
       </div>
     </div>
   </div>
@@ -32,12 +33,14 @@ export default {
     this.logs = JSON.parse(localStorage.getItem('logs')) || []
   },
   methods: {
-    onCreateLog: function(log) {
+    onCreateLog: function(content) {
       const now = new Date
+      const date = now.toISOString()
 
       this.logs.push({
-        date: now.toISOString(),
-        content: log,
+        timestamp: new Date().getTime(),
+        date,
+        content,
       })
 
       localStorage.setItem('logs', JSON.stringify(this.logs));
